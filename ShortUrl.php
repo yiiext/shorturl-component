@@ -23,19 +23,22 @@
  *		'class' => 'ext.shorturl.ShortUrl',
  *		'apiKey' => 'xxxxxx', // apikey
  *	),
+ * -------------
+ * Usage:
+ * Yii::app()->shorturl->short('http://mysite.com/MyReallyLongUrl?withLongLongParams=1');
  */
 class ShortUrl extends CApplicationComponent
 {
 	/**
-	 * @var Current class version
+	 * @var string Current class version
 	 */
-	const CLASS_VERSION = '1.0.0';
+	const CLASS_VERSION = '1.0.1';
 	/**
-	 * @var API URL
+	 * @var string API URL
 	 */
 	const API_URL = 'https://www.googleapis.com/urlshortener/v1/url';
 	/**
-	 * @var API Key
+	 * @var string|null API Key
 	 */
 	public $apiKey = null;
 	/**
@@ -64,15 +67,16 @@ class ShortUrl extends CApplicationComponent
 		{
 			throw new CException('Set apiKey in config', 500);
 		}
-		return $this->shortenUrl($longUrl, $this->apiKey);
+		return $this->reduceUrl($longUrl, $this->apiKey);
 	}
 
 	/**
+	 * Reduce the line
 	 * @param string $longUrl
 	 * @param string $apiKey
 	 * @return string|false
 	 */
-	function shortenUrl($longUrl, $apiKey)
+	function reduceUrl($longUrl, $apiKey)
 	{
 		// initialize the cURL connection
 		$ch = curl_init(
