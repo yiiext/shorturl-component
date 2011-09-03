@@ -13,6 +13,7 @@
  * Description:
  * ------------
  * This extensions allows you to short url by the {@link goo.gl} service.
+ * Documentation for Google URL Shortener API: {@link http://code.google.com/intl/ru/apis/urlshortener/}
  *
  * Installation:
  * -------------
